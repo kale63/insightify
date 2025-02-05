@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANALyzer heh</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Days+One&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            Insightify
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- los msj aparecen aqui -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Ingresa tus datos!">
+            <button onclick="sendMessage()">
+                <i class="fa fa-paper-plane-o"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const chatMessages = document.getElementById('chat-messages');
+
+            if (userInput.value.trim() !== '') {
+                const userMessage = document.createElement('div');
+                userMessage.textContent = userInput.value;
+                userMessage.style.textAlign = 'right';
+                chatMessages.appendChild(userMessage);
+
+                const botMessage = document.createElement('div');
+                botMessage.textContent = "Okay then, sweet dreams everyone. Good night, sleep tight, don't let the bedbugs bite~!";
+                botMessage.style.textAlign = 'left';
+                chatMessages.appendChild(botMessage);
+
+                userInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
