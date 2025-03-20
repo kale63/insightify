@@ -3,49 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALyzer heh</title>
+    <title>Insightify</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Days+One&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <div class="chat-container">
-        <div class="chat-header">
-            Insightify
+<body class="landing-page">
+    <div class="landing-container">
+        <nav class="landing-nav">
+            <div class="nav-brand">Insightify</div>
+            <div class="nav-links">
+                <!-- no se si vamos a hacer login, pero lo pongo por si las dudas-->
+                <button class="btn-login" onclick="showLogin()">Login</button>
+            </div>
+        </nav>
+
+        <div class="title-section">
+            <div class="title-content">
+                <h1>Transforma tu Data en <br>🌟Insights🌟</h1>
+                <p>Análisis a partir de archivos yupi</p>
+                <button class="btn-primary" onclick="startNewChat()">
+                    <i class="fas fa-plus"></i> Nuevo Chat
+                </button>
+            </div>
+            <div class="home-image">
+                <img src="https://i.pinimg.com/736x/a8/f7/e6/a8f7e62065d2188c6089c8364bb1bceb.jpg" alt="">
+            </div>
         </div>
-        <div class="chat-messages" id="chat-messages">
-            <!-- los msj aparecen aqui -->
-        </div>
-        <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Ingresa tus datos!">
-            <button onclick="sendMessage()">
-                <i class="fa fa-paper-plane-o"></i>
-            </button>
+
+        <div class="features-section">
+            <div class="feature-card">
+                <i class="fas fa-brain"></i>
+                <h3>ns</h3>
+                <p>datos yupi</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-spoon"></i>
+                <h3>ns x2</h3>
+                <p>otro placeholder!</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>ns x3</h3>
+                <p>usa graficos 🗣️🗣️</p>
+            </div>
         </div>
     </div>
 
-    <script>
-        function sendMessage() {
-            const userInput = document.getElementById('user-input');
-            const chatMessages = document.getElementById('chat-messages');
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" onclick="hideLogin()">&times;</span>
+            <h2>vamos a poner login o lo quito? xd</h2>
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <button class="btn-primary">😶‍🌫️</button>
+        </div>
+    </div>
 
-            if (userInput.value.trim() !== '') {
-                const userMessage = document.createElement('div');
-                userMessage.textContent = userInput.value;
-                userMessage.style.textAlign = 'right';
-                chatMessages.appendChild(userMessage);
-
-                const botMessage = document.createElement('div');
-                botMessage.textContent = "Okay then, sweet dreams everyone. Good night, sleep tight, don't let the bedbugs bite~!";
-                botMessage.style.textAlign = 'left';
-                chatMessages.appendChild(botMessage);
-
-                userInput.value = '';
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
