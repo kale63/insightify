@@ -8,7 +8,7 @@ import base64
 from io import BytesIO
 import pandas as pd
 
-KEY = "AIzaSyDXO3s_IFSdWWRrf0oWZ3pmOL4DBraVgv4"
+KEY = "tu llave del api xd"
 client = genai.Client(api_key=KEY)
 chat = client.chats.create(
     model="gemini-2.0-flash",
