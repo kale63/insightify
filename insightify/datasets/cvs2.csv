@@ -1,4 +1,0 @@
-BADGE,OPERATION,EMAIL,TEMPORARY,PIN
-20171a,CREATE,jdoe@company.com,true,
-20172b,CREATE,llane@company.com,true,
-20173c,DELETE,ckent@company.com,false,
