@@ -51,7 +51,8 @@ def read_csv_context(name, df, n_preview=5):
     n_rows, n_cols = df.shape
     dtypes = df.dtypes.apply(lambda dt: dt.name).to_dict()
     missing = df.isnull().sum().to_dict()
-
+    
+    # Formatea la información en un resumen
     summary_lines = [
         f"**Dataset**: {name}",
         f"- Filas: {n_rows:,}",
@@ -80,6 +81,7 @@ def process_uploaded_files(uploaded_files):
     error_files = []
     success_count = 0
     
+    # Procesa cada archivo CSV subido
     for file in uploaded_files:
         try:
             name = os.path.splitext(file.name)[0]
@@ -131,6 +133,7 @@ def execute_ai_code(code, datasets):
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
     
+    # Ejecuta el código en un entorno controlado
     try:
         exec(code, exec_globals)
         sys.stdout = old_stdout
@@ -164,6 +167,7 @@ def display_chat_history():
                 st.markdown(msg)
         else:  # Insightify
             with st.chat_message(role.lower(), avatar="🧠"):
+                # El marcador "########" indica el inicio del bloque de código
                 if "########" in msg:
                     summary, code = msg.split("########", 1)
                     st.markdown(summary)
@@ -184,6 +188,8 @@ def setup_page():
     # Configura la página principal y establece el logo y título del sitio
     st.set_page_config(page_title="Insightify", layout="wide")
     
+    # Establece el logo y título
+    # Necesario el markdown con código HTML para centrar bien el logo y el título
     st.markdown(
         "<div style='text-align: center;'><img src='data:image/jpeg;base64,{}' width='150px'/></div>".format(
             base64.b64encode(open("logo.png", "rb").read()).decode()
@@ -232,7 +238,8 @@ def main():
             if len(st.session_state.history) == 1:  # Primera pregunta
                 init_msg = build_initial_message(st.session_state.contexts, st.session_state.history[-1][1])
                 resp = st.session_state.chat.send_message(init_msg)
-            else:  # Preguntas subsecuentes
+            else:
+                # Mensajes de seguimiento
                 resp = st.session_state.chat.send_message(st.session_state.history[-1][1])
             
             st.session_state.history.append(("Insightify", resp.text))
@@ -244,11 +251,11 @@ def main():
     if st.session_state.datasets and not st.session_state.waiting_response:
         # Primera interacción con entrada centrada
         if not st.session_state.history:
-            c1, c2, c3 = st.columns([1,2,1])
+            c1, c2, c3 = st.columns([1,3,1])
             with c2:
-                user_input = st.chat_input("¿Qué te gustaría analizar de tus datos?", key="init", 
+                user_input = st.chat_input("Escribe una instrucción", key="init", 
                                         disabled=st.session_state.processing)
-        else:  # Interacciones normales
+        else:  # Interacciones posteriores
             user_input = st.chat_input("Haz otra pregunta…", disabled=st.session_state.processing)
         
         if user_input:
@@ -256,7 +263,8 @@ def main():
             st.session_state.waiting_response = True
             st.session_state.processing = True
             st.rerun()
-    elif not uploaded_files:  # Mensaje a mostrar si no se subió ningún archivo
+    elif not uploaded_files:
+        # Mensaje inicial si no se han subido archivos
         st.info("Sube al menos un CSV para comenzar.")
 
 if __name__ == "__main__":
