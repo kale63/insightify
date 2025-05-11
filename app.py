@@ -116,7 +116,10 @@ def init_chat():
         model="gemini-2.0-flash",
         config=types.GenerateContentConfig(
             system_instruction=[types.Part.from_text(text=SYSTEM_INSTRUCTIONS)],
-            temperature=1.0
+            # La temperatura controla la aleatoriedad de las respuestas generadas, el valor por defecto es 1.0
+            # Un valor más bajo hará que las respuestas sean más predecibles y coherentes
+            # Los valores bajos son ideales para el análisis de datos, donde se busca precisión
+            temperature=0.5
         )
     )
 
@@ -186,7 +189,7 @@ def display_chat_history():
 
 def setup_page():
     # Configura la página principal y establece el logo y título del sitio
-    st.set_page_config(page_title="Insightify", layout="wide")
+    st.set_page_config(page_title="Insightify", layout="wide", page_icon="logo.png")
     
     # Establece el logo y título
     # Necesario el markdown con código HTML para centrar bien el logo y el título

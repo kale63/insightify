@@ -7,4 +7,5 @@ KEY = "tu_clave_de_api"
 Puedes cambiar las instrucciones del sistema para que se adapten a tus necesidades.
 
 Este programa usa Streamlit para la interfaz gráfica, por lo que es necesario tener instalado Streamlit en tu entorno de Python.
+Ejecuta el programa con el siguiente comando:
 streamlit run app.py
