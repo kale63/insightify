@@ -204,6 +204,43 @@ def setup_page():
         unsafe_allow_html=True
     )
 
+# Modal de ayuda
+@st.dialog("Guía de uso de Insightify", width='large')  
+def show_help_dialog():
+    st.subheader("¿Cómo usar Insightify?")
+    
+    st.markdown("### Archivos admitidos")
+    st.write("""
+    - Solo se aceptan archivos en formato CSV (valores separados por comas)
+    - Los archivos deben tener un encabezado con nombres de columnas
+    - Se recomienda que los datos estén limpios y bien estructurados para mejores resultados, pero el modelo puede ayudarte con ello
+    - Tamaño máximo: hasta 200MB por archivo
+    """)
+    
+    st.markdown("### Formato de los datos")
+    st.write("""
+    - Las fechas deben estar en formato estándar (YYYY-MM-DD)
+    - Los valores numéricos deben usar punto como separador decimal
+    - Los datos categóricos deben ser consistentes (mismas categorías en toda la columna)
+    - Se pueden cargar múltiples archivos CSV relacionados
+    """)
+    
+    st.markdown("### Consideraciones importantes")
+    st.write("""
+    - Los análisis generados por IA son orientativos y deben ser verificados
+    - La calidad del análisis depende de la calidad de los datos proporcionados
+    - Todo el procesamiento es temporal y no se guarda en tus archivos
+    - Las visualizaciones se generan en tiempo real y se ejecutan localmente
+    """)
+    
+    st.markdown("### Consejos para mejores resultados")
+    st.write("""
+    - Sé específico en tus preguntas o instrucciones
+    - Para análisis complejos, proporciona contexto adicional
+    - Puedes pedir visualizaciones específicas (gráficos de barras, líneas, etc.)
+    - Si el análisis no es lo que esperabas, reformula tu pregunta
+    """)
+
 # ----- Función principal de la aplicación -----
 def main():
     # Configura la página, inicializa el estado y procesa los archivos CSV subidos
@@ -214,6 +251,10 @@ def main():
     with st.sidebar:
         st.header("📂 Datasets")
         uploaded_files = st.file_uploader("Sube uno o más CSV", type="csv", accept_multiple_files=True)
+                
+        # Coloca el botón de ayuda en el sidebar
+        if st.button("ℹ️ Instrucciones de uso"):
+            show_help_dialog()
     
     # Procesa los archivos CSV subidos y genera contextos
     if uploaded_files:
